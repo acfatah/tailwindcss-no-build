@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+    />
+
+    <!-- Lucide Icon -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        lucide.createIcons()
+      })
+    </script>
+
+    <!-- Tailwindcss -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              background: {
+                DEFAULT: 'hsl(var(--background))',
+                dark: 'hsl(var(--background))',
+              },
+              foreground: {
+                DEFAULT: 'hsl(var(--foreground))',
+                dark: 'hsl(var(--foreground))',
+              },
+              border: 'hsl(var(--border))',
+              input: 'hsl(var(--input))',
+              ring: 'hsl(var(--ring))',
+            },
+            borderRadius: {
+              xl: 'calc(var(--radius) + 4px)',
+              lg: 'var(--radius)',
+              md: 'calc(var(--radius) - 2px)',
+              sm: 'calc(var(--radius) - 4px)',
+            },
+          },
+        },
+      }
+    </script>
+    <style type="text/tailwindcss">
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 3.9%;
+        --border: 0 0% 89.8%;
+        --input: 0 0% 89.8%;
+        --ring: 0 0% 3.9%;
+        --radius: 0.3rem;
+      }
+
+      .dark {
+        --background: 0 0% 3.9%;
+        --foreground: 0 0% 98%;
+        --border: 0 0% 14.9%;
+        --input: 0 0% 14.9%;
+        --ring: 0 0% 14.9%;
+      }
+
+      body {
+        @apply p-2 sm:p-4 text-foreground bg-background;
+      }
+
+      h1 > small,
+      h2 > small,
+      h3 > small,
+      h4 > small,
+      h5 > small,
+      h6 > small {
+        @apply font-light;
+      }
+
+      blockquote > cite {
+        @apply block text-sm font-light;
+      }
+
+      h1 > hr,
+      h2 > hr,
+      h3 > hr,
+      h4 > hr,
+      h5 > hr,
+      h6 > hr {
+        @apply !mt-2 !mb-0;
+      }
+
+      table > caption {
+        @apply text-neutral-500 dark:text-neutral-400 caption-bottom;
+      }
+
+      fieldset {
+        @apply p-2 sm:p-4 border-2 border-border rounded-xl;
+      }
+
+      legend {
+        @apply p-2 text-lg font-bold;
+      }
+
+      fieldset,
+      form {
+        @apply flex flex-col gap-2;
+      }
+
+      form > [role='help'] {
+        @apply relative -top-1 text-neutral-500 dark:text-neutral-400;
+      }
+
+      form > [role='alert'] {
+        @apply relative -top-1 text-red-500;
+      }
+
+      fieldset > [role='button'],
+      form > [role='button'] {
+        @apply flex gap-2 justify-end;
+      }
+
+      label {
+        @apply relative -bottom-1 flex items-center;
+      }
+
+      label[for]:has(input[type='checkbox']),
+      label[for]:has(input[type='radio']),
+      label[for]:has(input[type='color']) {
+        @apply gap-2;
+      }
+
+      label[for]:has(+ input:required)::before {
+        content: ' *';
+        @apply relative -top-1 text-red-500;
+      }
+
+      input[type='text'],
+      input[type='password'],
+      input[type='number'],
+      input[type='email'],
+      input[type='date'],
+      select,
+      textarea {
+        @apply border rounded-xl border-neutral-300 text-foreground bg-background hover:border-blue-500 hover:bg-opacity-50 focus:bg-neutral-50 dark:focus:bg-neutral-900;
+      }
+
+      .dark input[type='date']::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+      }
+
+      input::placeholder {
+        @apply text-neutral-500;
+      }
+
+      input:disabled,
+      select:disabled,
+      textarea:disabled {
+        @apply opacity-50 cursor-not-allowed hover:border-neutral-300 hover:bg-none;
+      }
+
+      button[type='reset'],
+      button[type='submit'] {
+        @apply border rounded-xl sm:px-4 sm:max-w-min border-neutral-300 hover:bg-neutral-50 hover:border-blue-500 dark:hover:bg-neutral-900;
+      }
+
+      button[type='reset'] {
+        @apply text-neutral-500 dark:text-neutral-400;
+      }
+    </style>
+
+    <!-- Main JS script -->
+    <script type="module" src="/js/main.js" defer></script>
+  </head>
+
+  <body class="">
+    <div id="dark-mode-toggle" class="fixed top-4 right-4 z-10 p-1 rounded select-none cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900">
+      <i data-lucide="moon"></i>
+    </div>
+    <div class="prose prose-neutral dark:prose-invert container mx-auto">
+      <header>
+        <h1>HTML Boilerplate with Tailwind</h1>
+        <p>This page showcases various HTML elements without any styling.</p>
+      </header>
+
+      <!-- Headings -->
+      <section>
+        <h2>
+          Headings
+          <hr />
+        </h2>
+
+        <h1>
+          Heading 1
+          <small>Subheading</small>
+        </h1>
+        <h2>
+          Heading 2
+          <small>Subheading</small>
+        </h2>
+        <h3>
+          Heading 3
+          <small>Subheading</small>
+        </h3>
+        <h4>
+          Heading 4
+          <small>Subheading</small>
+        </h4>
+        <h5>
+          Heading 5
+          <small>Subheading</small>
+        </h5>
+        <h6>
+          Heading 6
+          <small>Subheading</small>
+        </h6>
+      </section>
+
+      <!-- Basic Typography -->
+      <section>
+        <h2>
+          Basic Typography
+          <hr />
+        </h2>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+
+        <p>This is a paragraph. It is a basic block of text in HTML.</p>
+        <p><strong>This is bold text.</strong></p>
+        <p><em>This is italic text.</em></p>
+        <p><u>This is underlined text.</u></p>
+        <p><s>This is strikeout text.</s></p>
+        <p><mark>This is highlighted text.</mark></p>
+        <p><small>This is small text.</small></p>
+        <p>This text includes a <a href="#">link</a>.</p>
+        <blockquote>
+          This is a blockquote.
+          <cite>- John Doe</cite>
+        </blockquote>
+      </section>
+
+      <!-- Lists -->
+      <section>
+        <h2>
+          Lists
+          <hr />
+        </h2>
+
+        <h3>Unordered List</h3>
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+        </ul>
+
+        <h3>Ordered List</h3>
+        <ol>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+        </ol>
+
+        <h3>Description List</h3>
+        <dl>
+          <dt>HTML</dt>
+          <dd>Hypertext Markup Language</dd>
+          <dt>CSS</dt>
+          <dd>Cascading Style Sheets</dd>
+        </dl>
+      </section>
+
+      <!-- Media -->
+      <section>
+        <h2>
+          Media
+          <hr />
+        </h2>
+
+        <figure>
+          <img src="https://via.placeholder.com/150" alt="Placeholder image" />
+          <figcaption>Sample image</figcaption>
+        </figure>
+        <video controls>
+          <source src="sample-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <audio controls>
+          <source src="sample-audio.mp3" type="audio/mp3" />
+          Your browser does not support the audio tag.
+        </audio>
+      </section>
+
+      <!-- Table -->
+      <section>
+        <h2>
+          Table
+          <hr />
+        </h2>
+
+        <table border="1">
+          <caption>
+            Sample Table
+          </caption>
+          <thead>
+            <tr>
+              <th>Header 1</th>
+              <th>Header 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Row 1, Cell 1</td>
+              <td>Row 1, Cell 2</td>
+            </tr>
+            <tr>
+              <td>Row 2, Cell 1</td>
+              <td>Row 2, Cell 2</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Form Elements -->
+      <section>
+        <h2>
+          Form Elements
+          <hr />
+        </h2>
+
+        <form>
+          <label for="text">Text:</label>
+          <input type="text" id="text" name="text" placeholder="Enter text" />
+          <small role="help">This is a sample text input.</small>
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+          <div role="alert">This is a sample of error message.</div>
+
+          <label for="text-disabled">Disabled:</label>
+          <input type="text" id="text-disabled" name="text" disabled />
+
+          <label for="number">Number:</label>
+          <input type="number" id="number" name="number" />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" />
+
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" />
+
+          <label for="color">
+            Color:
+            <input type="color" id="color" name="color" />
+          </label>
+
+          <label for="checkbox">
+            <input type="checkbox" id="checkbox" name="checkbox" />
+            Checkbox
+          </label>
+
+          <label for="radio1">
+            <input type="radio" id="radio1" name="radio" />
+            Radio 1
+          </label>
+
+          <label for="radio2">
+            <input type="radio" id="radio2" name="radio" />
+            Radio 2
+          </label>
+
+          <label for="select">Select:</label>
+          <select id="select" name="select">
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+
+          <label for="textarea">Textarea:</label>
+          <textarea id="textarea" name="textarea"></textarea>
+
+          <div role="button">
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+
+        <form>
+          <fieldset>
+            <legend>Contact Form</legend>
+            <label for="contactName">Name:</label>
+            <input type="text" id="contactName" name="name" />
+
+            <label for="contactEmail">Email:</label>
+            <input type="email" id="contactEmail" name="email" />
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea>
+
+            <div role="button">
+              <button type="submit">Send</button>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- Semantic Elements -->
+      <section>
+        <h2>
+          Semantic Elements
+          <hr />
+        </h2>
+
+        <article>
+          <h3>Article</h3>
+          <p>This is an article section.</p>
+        </article>
+        <aside>
+          <h3>Aside</h3>
+          <p>This is an aside section.</p>
+        </aside>
+        <footer>
+          <p>This is the footer of the page.</p>
+        </footer>
+      </section>
+    </div>
+  </body>
+</html>

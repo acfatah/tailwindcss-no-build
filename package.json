@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "dev": "npx live-server example",
+    "format": "npx prettier --write -c ~/prettier.config.mjs ."
+  }
+}
