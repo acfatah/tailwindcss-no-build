@@ -22,3 +22,9 @@ toggleButton?.addEventListener('click', () => {
     `
   }
 })
+
+const sampleCanvas = document.getElementById('sample-canvas')
+const ctx = sampleCanvas?.getContext("2d")
+sampleCanvas?.classList.add('border', 'border-border')
+ctx.fillStyle = "#FF0000"
+ctx.fillRect(0, 0, 80, 80)

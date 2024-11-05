@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -40,7 +40,10 @@
                 DEFAULT: 'hsl(var(--foreground))',
                 dark: 'hsl(var(--foreground))',
               },
-              border: 'hsl(var(--border))',
+              border: {
+                DEFAULT: 'hsl(var(--border))',
+                dark: 'hsl(var(--border))',
+              },
               input: 'hsl(var(--input))',
               ring: 'hsl(var(--ring))',
             },
@@ -98,6 +101,10 @@
         @apply !mt-2 !mb-0;
       }
 
+      progress {
+        @apply text-neutral-500 dark:text-neutral-400;
+      }
+
       table > caption {
         @apply text-neutral-500 dark:text-neutral-400 caption-bottom;
       }
@@ -150,7 +157,7 @@
       input[type='date'],
       select,
       textarea {
-        @apply border rounded-xl border-neutral-300 text-foreground bg-background hover:border-blue-500 hover:bg-opacity-50 focus:bg-neutral-50 dark:focus:bg-neutral-900;
+        @apply border rounded-xl text-foreground bg-background hover:border-blue-500 hover:bg-opacity-50 focus:bg-neutral-50 dark:focus:bg-neutral-900;
       }
 
       .dark input[type='date']::-webkit-calendar-picker-indicator {
@@ -164,7 +171,7 @@
       input:disabled,
       select:disabled,
       textarea:disabled {
-        @apply opacity-50 cursor-not-allowed hover:border-neutral-300 hover:bg-none;
+        @apply opacity-50 cursor-not-allowed hover:border-neutral-500 hover:bg-none;
       }
 
       button[type='reset'],
@@ -239,17 +246,35 @@
         </p>
 
         <p>This is a paragraph. It is a basic block of text in HTML.</p>
-        <p><strong>This is bold text.</strong></p>
-        <p><em>This is italic text.</em></p>
-        <p><u>This is underlined text.</u></p>
-        <p><s>This is strikeout text.</s></p>
-        <p><mark>This is highlighted text.</mark></p>
-        <p><small>This is small text.</small></p>
+        <p><strong>This text uses strong element.</strong></p>
+        <p><em>This italic text uses em element.</em></p>
+        <p><b>This text uses b element.</b></p>
+        <p><i>This text uses i element.</i></p>
+        <p><u>This underlined text uses u element.</u></p>
+        <p><s>This strikeout text uses s element.</s></p>
+        <p><mark>This highlighted text uses mark element.</mark></p>
+        <p><small>This small text uses small element.</small></p>
         <p>This text includes a <a href="#">link</a>.</p>
+        <p><ins>This inserted text uses ins element.</ins></p>
+        <p><del>This deleted text uses del element.</del></p>
+        <p>Superscript<sup>®</sup> text uses sup element.</p>
+        <p>Subscript for things like H<sub>2</sub>O uses sub element.</p>
+        <p><q>This is an inline quote that uses q element.</q></p>
+        <p>The <var>var</var> element for variables, such as <var>x</var> = <var>y</var>.</p>
+        <p>
+          <abbr title="Mozilla Developer Network">MDN</abbr> is an open source project.
+        </p>
+        <p><cite>This is a citation.</cite></p>
         <blockquote>
           This is a blockquote.
           <cite>- John Doe</cite>
         </blockquote>
+        <p></p>
+        <p>The time element: </p>
+        <ul>
+          <li>Open from <time>10:00</time> to <time>21:00</time> every weekday.</li>
+          <li><time datetime="2013-04-06T12:32+00:00">more than 2 weeks ago</time></li>
+        </ul>
       </section>
 
       <!-- Lists -->
@@ -273,7 +298,7 @@
           <li>Item 3</li>
         </ol>
 
-        <h3>Description List</h3>
+        <h3>Definition List</h3>
         <dl>
           <dt>HTML</dt>
           <dd>Hypertext Markup Language</dd>
@@ -282,25 +307,50 @@
         </dl>
       </section>
 
-      <!-- Media -->
+      <!-- Embeded Contents -->
       <section>
         <h2>
-          Media
+          Embeded Contents
           <hr />
         </h2>
+
+        <h3>Image Without Figure Element</h3>
+
+        <p>
+          <img src="https://via.placeholder.com/150" alt="Placeholder image" />
+        </p>
+
+        <h3>Image With Figure Element</h3>
 
         <figure>
           <img src="https://via.placeholder.com/150" alt="Placeholder image" />
           <figcaption>Sample image</figcaption>
         </figure>
+
+        <h3>Video and Audio</h3>
+
         <video controls>
           <source src="sample-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+
         <audio controls>
           <source src="sample-audio.mp3" type="audio/mp3" />
           Your browser does not support the audio tag.
         </audio>
+
+        <h3>Canvas</h3>
+
+        <canvas id="sample-canvas">canvas</canvas>
+
+        <h3>Meter</h3>
+
+        <meter value="2" min="0" max="10">2 out of 10</meter>
+
+        <h3>Progress</h3>
+
+        <progress value="50" max="100">50%</progress>
+
       </section>
 
       <!-- Table -->
@@ -333,6 +383,29 @@
         </table>
       </section>
 
+      <section>
+        <h2>
+          Buttons
+          <hr />
+        </h2>
+
+        <p>
+          <input type="submit" value="Input Submit">
+        </p>
+
+        <p>
+          <button>Button</button>
+        </p>
+
+        <p>
+          <a href="#"><button>Button Link</button></a>
+        </p>
+
+        <p>
+          <button disabled>Disabled Button</button>
+        </p>
+      </section>
+
       <!-- Form Elements -->
       <section>
         <h2>
@@ -357,6 +430,9 @@
 
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" />
+
+          <label for="url">URL:</label>
+          <input type="url" id="url" name="url" />
 
           <label for="date">Date:</label>
           <input type="date" id="date" name="date" />
@@ -400,8 +476,8 @@
         <form>
           <fieldset>
             <legend>Contact Form</legend>
-            <label for="contactName">Name:</label>
-            <input type="text" id="contactName" name="name" />
+            <label for="contact-name">Name:</label>
+            <input type="text" id="contact-name" name="name" />
 
             <label for="contactEmail">Email:</label>
             <input type="email" id="contactEmail" name="email" />
@@ -434,6 +510,176 @@
         <footer>
           <p>This is the footer of the page.</p>
         </footer>
+      </section>
+
+      <section>
+        <h2>
+          Code blocks
+          <hr />
+        </h2>
+
+        <p><strong>Keyboard input:</strong> <kbd>Cmd</kbd></p>
+
+        <p><strong>Inline code:</strong> <code>&lt;div&gt;code&lt;/div&gt;</code></p>
+
+        <p><strong>Sample output:</strong> <samp>This is sample output from a computer program.</samp></p>
+
+        <p><strong>Preformatted text:</strong></p>
+        <pre>
+          <code>
+// --- Demonstration of imports ---
+
+// Importing named exports and the default export
+import defaultAnimal, { person, add } from './module.js';
+
+// Importing everything from the module as an alias
+import * as Module from './module.js';
+
+
+// --- Demonstration of exports ---
+
+// Named exports
+export const person = { name: "Alice", age: 30 };
+
+export function add(x, y = 0) {
+  return x + y;
+}
+
+// Default export
+const defaultAnimal = { name: "Default Animal" };
+export default defaultAnimal;
+
+// Generator function
+export function* idGenerator() {
+  let id = 0;
+  while (true) {
+    yield id++;
+  }
+}
+
+// Using typeof for runtime type checks
+console.log(typeof person);  // object
+console.log(add(2, 3));      // 5
+console.log(defaultAnimal);  // { name: "Default Animal" }
+
+// Emulating 'satisfies' behavior using runtime checks
+function createAnimal(animal) {
+  if (typeof animal.name === 'string') {
+    return animal;  // Ensures the animal has a 'name' property
+  }
+  throw new Error("Animal must have a name");
+}
+
+const dog = createAnimal({ name: "Buddy", breed: "Golden Retriever" });
+console.log(dog);  // { name: 'Buddy', breed: 'Golden Retriever' }
+
+// Generator usage
+const generator = Module.idGenerator();
+console.log(generator.next().value);  // 0
+console.log(generator.next().value);  // 1
+console.log(generator.next().value);  // 2
+
+// Handling a generic-like behavior by allowing any type and runtime checks
+function identity(arg) {
+  return arg;
+}
+
+let str = identity("Hello");
+let num = identity(42);
+console.log(str, num);  // "Hello", 42
+
+// Emulating default generics by using default parameters
+function wrapInArray(value = "") {
+  return [value];
+}
+
+const stringArray = wrapInArray();  // Default is empty string
+const numberArray = wrapInArray(42);  // Passes 42 explicitly
+console.log(stringArray, numberArray);  // [""] , [42]
+
+// --- for-of and for-in loops ---
+
+// for-of: Iterates over iterable objects like arrays, strings, maps, etc.
+const fruits = ["apple", "banana", "cherry"];
+for (const fruit of fruits) {
+  console.log(fruit);  // Outputs: apple, banana, cherry
+}
+
+// for-in: Iterates over enumerable properties of an object
+const car = { make: "Tesla", model: "Model S", year: 2021 };
+for (const key in car) {
+  if (car.hasOwnProperty(key)) {
+    console.log(`${key}: ${car[key]}`);  // Outputs key-value pairs of car object
+  }
+}
+
+// --- IIFE (Immediately Invoked Function Expression) ---
+
+(function () {
+  console.log("This IIFE runs immediately after it's defined.");
+  const privateVar = "I'm private inside the IIFE!";
+  console.log(privateVar);  // Accessing the private variable inside the IIFE
+})();
+
+// --- Using a generator to loop indefinitely ---
+function* infiniteGenerator() {
+  let i = 0;
+  while (true) {
+    yield i++;
+  }
+}
+
+const gen = infiniteGenerator();
+console.log(gen.next().value);  // 0
+console.log(gen.next().value);  // 1
+
+// --- Async and Await ---
+
+async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error);
+  }
+}
+
+// Example usage of async function
+fetchData('https://jsonplaceholder.typicode.com/todos/1')
+  .then(data => console.log(data))  // Outputs fetched data
+  .catch(error => console.error(error));
+
+// JSDoc type annotations
+/**
+* @typedef {Object} Task
+* @property {string} title
+* @property {boolean} completed
+*/
+
+/**
+* Create a task
+* @param {Task} task
+* @returns {Task}
+*/
+function createTask(task) {
+  return task;
+}
+
+const myTask = createTask({
+  title: "Learn JavaScript",
+  completed: false,
+});
+console.log(myTask);
+
+// Importing everything as a namespace (simulated for demonstration)
+console.log(Module.person);  // { name: "Alice", age: 30 }
+console.log(Module.add(10, 20));  // 30
+          </code>
+        </pre>
       </section>
     </div>
   </body>
