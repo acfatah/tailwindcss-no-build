@@ -12,7 +12,7 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
 1. Add the Tailwindcss config,
 
 ```html
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
 <script>
   tailwind.config = {
     darkMode: 'class',
