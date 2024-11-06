@@ -5,11 +5,11 @@
   <img alt="GitHub last commit (by committer)" src="https://img.shields.io/github/last-commit/acfatah/tailwindcss-no-build?display_timestamp=committer&style=flat-square"></a>
 </p>
 
-Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss.com) websites without a Node.js environment and using a CDN setup
+Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss.com) websites using a CDN setup without Node.js environment.
 
 ## Usage
 
-1. Add Tailwindcss config,
+1. Add the Tailwindcss config,
 
 ```html
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
@@ -84,12 +84,12 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
     }
 
     :focus {
-      @apply border-primary outline-none ring-2 ring-primary;
+      @apply border-primary ring-primary outline-none ring-2;
     }
   }
 
   body {
-    @apply p-2 sm:p-4 text-foreground bg-background;
+    @apply text-foreground bg-background p-2 sm:p-4;
   }
 
   h1 > small,
@@ -111,7 +111,7 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   h4 > hr,
   h5 > hr,
   h6 > hr {
-    @apply !mt-2 !mb-0;
+    @apply !mb-0 !mt-2;
   }
 
   hr {
@@ -123,19 +123,19 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   }
 
   meter {
-    @apply h-6 rounded-xl overflow-hidden;
+    @apply h-6 overflow-hidden rounded-xl;
   }
 
   progress {
-    @apply border-2 border-border rounded-xl overflow-hidden;
+    @apply border-border overflow-hidden rounded-xl border-2;
   }
 
   table > caption {
-    @apply text-neutral-500 dark:text-neutral-400 caption-bottom;
+    @apply caption-bottom text-neutral-500 dark:text-neutral-400;
   }
 
   fieldset {
-    @apply p-2 sm:p-4 border-2 border-border rounded-xl;
+    @apply border-border rounded-xl border-2 p-2 sm:p-4;
   }
 
   legend {
@@ -157,7 +157,7 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
 
   fieldset > [role='button'],
   form > [role='button'] {
-    @apply flex gap-2 justify-end;
+    @apply flex justify-end gap-2;
   }
 
   label {
@@ -167,7 +167,7 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   label[for]:has(input[type='checkbox']),
   label[for]:has(input[type='radio']),
   label[for]:has(input[type='color']) {
-    @apply gap-2 select-none hover:cursor-pointer;
+    @apply select-none gap-2 hover:cursor-pointer;
   }
 
   input[type='checkbox'],
@@ -192,7 +192,7 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   input[type='date'],
   select,
   textarea {
-    @apply border border-border rounded-xl font-normal;
+    @apply border-border rounded-xl border font-normal;
   }
 
   a[role='button'],
@@ -206,13 +206,13 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   input[type='date'],
   select,
   textarea {
-    @apply border border-border rounded-xl font-normal text-foreground bg-background hover:border-primary hover:outline-none hover:ring-primary;
+    @apply border-border text-foreground bg-background hover:border-primary hover:ring-primary rounded-xl border font-normal hover:outline-none;
   }
 
   form input[type='submit'],
   form button[type='submit'],
   input[type='submit'] {
-    @apply border-primary bg-primary text-white hover:bg-primary/80 focus:border-primary/80 focus:bg-primary/80;
+    @apply border-primary bg-primary hover:bg-primary/80 focus:border-primary/80 focus:bg-primary/80 text-white;
   }
 
   input[type='date']::-webkit-calendar-picker-indicator {
@@ -229,7 +229,7 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   }
 
   input[type='date']::-webkit-calendar-picker-indicator:focus {
-    @apply outline-none ring-2 ring-primary;
+    @apply ring-primary outline-none ring-2;
   }
 
   input[type='color']:focus {
@@ -244,7 +244,7 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   input:disabled,
   select:disabled,
   textarea:disabled {
-    @apply opacity-50 hover:border-neutral-500 hover:bg-background hover:cursor-not-allowed;
+    @apply hover:bg-background opacity-50 hover:cursor-not-allowed hover:border-neutral-500;
   }
 
   a[role='button'],
