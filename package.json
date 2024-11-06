@@ -2,5 +2,8 @@
   "scripts": {
     "dev": "npx live-server example",
     "format": "npx prettier --write -c ~/prettier.config.mjs ."
+  },
+  "devDependencies": {
+    "prettier-plugin-tailwindcss": "^0.6.8"
   }
 }
