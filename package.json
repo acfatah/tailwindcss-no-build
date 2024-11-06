@@ -1,9 +1,10 @@
 {
   "scripts": {
     "dev": "npx live-server example",
-    "format": "npx prettier --write -c ~/prettier.config.mjs ."
+    "format": "prettier --write -c ~/prettier.config.mjs ."
   },
   "devDependencies": {
+    "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8"
   }
 }
