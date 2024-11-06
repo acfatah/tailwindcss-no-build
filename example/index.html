@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -32,6 +32,10 @@
               sans: ['Inter', 'sans-serif'],
             },
             colors: {
+              primary: {
+                DEFAULT: 'hsl(var(--primary))',
+                dark: 'hsl(var(--primary))',
+              },
               background: {
                 DEFAULT: 'hsl(var(--background))',
                 dark: 'hsl(var(--background))',
@@ -59,9 +63,10 @@
     </script>
     <style type="text/tailwindcss">
       :root {
+        --primary: 217 91% 60%;
         --background: 0 0% 100%;
         --foreground: 0 0% 3.9%;
-        --border: 0 0% 89.8%;
+        --border: 0 0% 45%;
         --input: 0 0% 89.8%;
         --ring: 0 0% 3.9%;
         --radius: 0.3rem;
@@ -70,9 +75,22 @@
       .dark {
         --background: 0 0% 3.9%;
         --foreground: 0 0% 98%;
-        --border: 0 0% 14.9%;
         --input: 0 0% 14.9%;
         --ring: 0 0% 14.9%;
+      }
+
+      @layer base {
+        :not(input[type='checkbox'], a):focus {
+          @apply rounded-xl;
+        }
+
+        :not(input[type='submit']):focus {
+          @apply bg-background/10 dark:bg-background/90;
+        }
+
+        :focus {
+          @apply border-primary outline-none ring-2 ring-primary;
+        }
       }
 
       body {
@@ -101,8 +119,20 @@
         @apply !mt-2 !mb-0;
       }
 
+      hr {
+        @apply border-border;
+      }
+
+      a:focus {
+        @apply rounded-sm;
+      }
+
+      meter {
+        @apply h-6 rounded-xl overflow-hidden;
+      }
+
       progress {
-        @apply text-neutral-500 dark:text-neutral-400;
+        @apply border-2 border-border rounded-xl overflow-hidden;
       }
 
       table > caption {
@@ -142,7 +172,12 @@
       label[for]:has(input[type='checkbox']),
       label[for]:has(input[type='radio']),
       label[for]:has(input[type='color']) {
-        @apply gap-2;
+        @apply gap-2 select-none hover:cursor-pointer;
+      }
+
+      input[type='checkbox'],
+      input[type='radio'] {
+        @apply hover:cursor-pointer;
       }
 
       label[for]:has(+ input:required)::before {
@@ -150,37 +185,82 @@
         @apply relative -top-1 text-red-500;
       }
 
+      a[role='button'],
+      button,
+      input[type='submit'],
+      input[type='reset'],
       input[type='text'],
       input[type='password'],
       input[type='number'],
       input[type='email'],
+      input[type='url'],
       input[type='date'],
       select,
       textarea {
-        @apply border rounded-xl text-foreground bg-background hover:border-blue-500 hover:bg-opacity-50 focus:bg-neutral-50 dark:focus:bg-neutral-900;
+        @apply border border-border rounded-xl font-normal;
+      }
+
+      a[role='button'],
+      button,
+      input[type='reset'],
+      input[type='text'],
+      input[type='password'],
+      input[type='number'],
+      input[type='email'],
+      input[type='url'],
+      input[type='date'],
+      select,
+      textarea {
+        @apply border border-border rounded-xl font-normal text-foreground bg-background hover:border-primary hover:outline-none hover:ring-primary;
+      }
+
+      form input[type='submit'],
+      form button[type='submit'],
+      input[type='submit'] {
+        @apply border-primary bg-primary text-white hover:bg-primary/80 focus:border-primary/80 focus:bg-primary/80;
+      }
+
+      input[type='date']::-webkit-calendar-picker-indicator {
+        @apply cursor-pointer;
       }
 
       .dark input[type='date']::-webkit-calendar-picker-indicator {
         filter: invert(1);
+        @apply cursor-pointer;
+      }
+
+      .dark input[type='date']::-webkit-calendar-picker-indicator:focus {
+        filter: invert(1) hue-rotate(180deg);
+      }
+
+      input[type='date']::-webkit-calendar-picker-indicator:focus {
+        @apply outline-none ring-2 ring-primary;
+      }
+
+      input[type='color']:focus {
+        @apply rounded;
       }
 
       input::placeholder {
         @apply text-neutral-500;
       }
 
+      button:disabled,
       input:disabled,
       select:disabled,
       textarea:disabled {
-        @apply opacity-50 cursor-not-allowed hover:border-neutral-500 hover:bg-none;
+        @apply opacity-50 hover:border-neutral-500 hover:bg-background hover:cursor-not-allowed;
       }
 
-      button[type='reset'],
-      button[type='submit'] {
-        @apply border rounded-xl sm:px-4 sm:max-w-min border-neutral-300 hover:bg-neutral-50 hover:border-blue-500 dark:hover:bg-neutral-900;
+      a[role='button'],
+      button,
+      input[type='submit'],
+      input[type='reset'] {
+        @apply px-4 py-1 no-underline hover:cursor-pointer;
       }
 
-      button[type='reset'] {
-        @apply text-neutral-500 dark:text-neutral-400;
+      a[role='button'] {
+        @apply py-2;
       }
     </style>
 
@@ -189,7 +269,10 @@
   </head>
 
   <body>
-    <div id="dark-mode-toggle" class="fixed top-4 right-4 z-10 p-1 rounded select-none cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900">
+    <div
+      id="dark-mode-toggle"
+      class="fixed top-4 right-4 z-10 p-1 rounded select-none cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-900"
+    >
       <i data-lucide="moon"></i>
     </div>
     <div class="prose prose-neutral dark:prose-invert container mx-auto">
@@ -260,9 +343,13 @@
         <p>Superscript<sup>®</sup> text uses sup element.</p>
         <p>Subscript for things like H<sub>2</sub>O uses sub element.</p>
         <p><q>This is an inline quote that uses q element.</q></p>
-        <p>The <var>var</var> element for variables, such as <var>x</var> = <var>y</var>.</p>
         <p>
-          <abbr title="Mozilla Developer Network">MDN</abbr> is an open source project.
+          The <var>var</var> element for variables, such as <var>x</var> =
+          <var>y</var>.
+        </p>
+        <p>
+          <abbr title="Mozilla Developer Network">MDN</abbr> is an open source
+          project.
         </p>
         <p><cite>This is a citation.</cite></p>
         <blockquote>
@@ -270,10 +357,14 @@
           <cite>- John Doe</cite>
         </blockquote>
         <p></p>
-        <p>The time element: </p>
+        <p>The time element:</p>
         <ul>
-          <li>Open from <time>10:00</time> to <time>21:00</time> every weekday.</li>
-          <li><time datetime="2013-04-06T12:32+00:00">more than 2 weeks ago</time></li>
+          <li>
+            Open from <time>10:00</time> to <time>21:00</time> every weekday.
+          </li>
+          <li>
+            <time datetime="2013-04-06T12:32+00:00">more than 2 weeks ago</time>
+          </li>
         </ul>
       </section>
 
@@ -350,7 +441,6 @@
         <h3>Progress</h3>
 
         <progress value="50" max="100">50%</progress>
-
       </section>
 
       <!-- Table -->
@@ -390,7 +480,7 @@
         </h2>
 
         <p>
-          <input type="submit" value="Input Submit">
+          <input type="submit" value="Input Submit" />
         </p>
 
         <p>
@@ -398,7 +488,7 @@
         </p>
 
         <p>
-          <a href="#"><button>Button Link</button></a>
+          <a role="button" href="#">Button Link</a>
         </p>
 
         <p>
@@ -520,9 +610,14 @@
 
         <p><strong>Keyboard input:</strong> <kbd>Cmd</kbd></p>
 
-        <p><strong>Inline code:</strong> <code>&lt;div&gt;code&lt;/div&gt;</code></p>
+        <p>
+          <strong>Inline code:</strong> <code>&lt;div&gt;code&lt;/div&gt;</code>
+        </p>
 
-        <p><strong>Sample output:</strong> <samp>This is sample output from a computer program.</samp></p>
+        <p>
+          <strong>Sample output:</strong>
+          <samp>This is sample output from a computer program.</samp>
+        </p>
 
         <p><strong>Preformatted text:</strong></p>
         <pre>

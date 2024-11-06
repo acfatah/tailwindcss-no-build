@@ -15,13 +15,17 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
 <script>
   tailwind.config = {
-    darkMode: 'class', // Remove this line to use `prefers-color-scheme` CSS media feature
+    darkMode: 'class',
     theme: {
       extend: {
         fontFamily: {
           sans: ['Inter', 'sans-serif'],
         },
         colors: {
+          primary: {
+            DEFAULT: 'hsl(var(--primary))',
+            dark: 'hsl(var(--primary))',
+          },
           background: {
             DEFAULT: 'hsl(var(--background))',
             dark: 'hsl(var(--background))',
@@ -30,7 +34,10 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
             DEFAULT: 'hsl(var(--foreground))',
             dark: 'hsl(var(--foreground))',
           },
-          border: 'hsl(var(--border))',
+          border: {
+            DEFAULT: 'hsl(var(--border))',
+            dark: 'hsl(var(--border))',
+          },
           input: 'hsl(var(--input))',
           ring: 'hsl(var(--ring))',
         },
@@ -51,9 +58,10 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
 ```html
 <style type="text/tailwindcss">
   :root {
+    --primary: 217 91% 60%;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
-    --border: 0 0% 89.8%;
+    --border: 0 0% 45%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
     --radius: 0.3rem;
@@ -62,9 +70,22 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 14.9%;
+  }
+
+  @layer base {
+    :not(input[type='checkbox'], a):focus {
+      @apply rounded-xl;
+    }
+
+    :not(input[type='submit']):focus {
+      @apply bg-background/10 dark:bg-background/90;
+    }
+
+    :focus {
+      @apply border-primary outline-none ring-2 ring-primary;
+    }
   }
 
   body {
@@ -91,6 +112,22 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   h5 > hr,
   h6 > hr {
     @apply !mt-2 !mb-0;
+  }
+
+  hr {
+    @apply border-border;
+  }
+
+  a:focus {
+    @apply rounded-sm;
+  }
+
+  meter {
+    @apply h-6 rounded-xl overflow-hidden;
+  }
+
+  progress {
+    @apply border-2 border-border rounded-xl overflow-hidden;
   }
 
   table > caption {
@@ -130,7 +167,12 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   label[for]:has(input[type='checkbox']),
   label[for]:has(input[type='radio']),
   label[for]:has(input[type='color']) {
-    @apply gap-2;
+    @apply gap-2 select-none hover:cursor-pointer;
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    @apply hover:cursor-pointer;
   }
 
   label[for]:has(+ input:required)::before {
@@ -138,37 +180,82 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
     @apply relative -top-1 text-red-500;
   }
 
+  a[role='button'],
+  button,
+  input[type='submit'],
+  input[type='reset'],
   input[type='text'],
   input[type='password'],
   input[type='number'],
   input[type='email'],
+  input[type='url'],
   input[type='date'],
   select,
   textarea {
-    @apply border rounded-xl border-neutral-300 text-foreground bg-background hover:border-blue-500 hover:bg-opacity-50 focus:bg-neutral-50 dark:focus:bg-neutral-900;
+    @apply border border-border rounded-xl font-normal;
+  }
+
+  a[role='button'],
+  button,
+  input[type='reset'],
+  input[type='text'],
+  input[type='password'],
+  input[type='number'],
+  input[type='email'],
+  input[type='url'],
+  input[type='date'],
+  select,
+  textarea {
+    @apply border border-border rounded-xl font-normal text-foreground bg-background hover:border-primary hover:outline-none hover:ring-primary;
+  }
+
+  form input[type='submit'],
+  form button[type='submit'],
+  input[type='submit'] {
+    @apply border-primary bg-primary text-white hover:bg-primary/80 focus:border-primary/80 focus:bg-primary/80;
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator {
+    @apply cursor-pointer;
   }
 
   .dark input[type='date']::-webkit-calendar-picker-indicator {
     filter: invert(1);
+    @apply cursor-pointer;
+  }
+
+  .dark input[type='date']::-webkit-calendar-picker-indicator:focus {
+    filter: invert(1) hue-rotate(180deg);
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator:focus {
+    @apply outline-none ring-2 ring-primary;
+  }
+
+  input[type='color']:focus {
+    @apply rounded;
   }
 
   input::placeholder {
     @apply text-neutral-500;
   }
 
+  button:disabled,
   input:disabled,
   select:disabled,
   textarea:disabled {
-    @apply opacity-50 cursor-not-allowed hover:border-neutral-300 hover:bg-none;
+    @apply opacity-50 hover:border-neutral-500 hover:bg-background hover:cursor-not-allowed;
   }
 
-  button[type='reset'],
-  button[type='submit'] {
-    @apply border rounded-xl sm:px-4 sm:max-w-min border-neutral-300 hover:bg-neutral-50 hover:border-blue-500 dark:hover:bg-neutral-900;
+  a[role='button'],
+  button,
+  input[type='submit'],
+  input[type='reset'] {
+    @apply px-4 py-1 no-underline hover:cursor-pointer;
   }
 
-  button[type='reset'] {
-    @apply text-neutral-500 dark:text-neutral-400;
+  a[role='button'] {
+    @apply py-2;
   }
 </style>
 ```

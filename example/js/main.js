@@ -1,6 +1,9 @@
 document.title = 'HTML Boilerplate with Tailwind'
 
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+const prefersDarkScheme = window.matchMedia(
+  '(prefers-color-scheme: dark)'
+).matches
+
 const toggleButton = document.querySelector('#dark-mode-toggle')
 
 if (prefersDarkScheme) {
@@ -24,7 +27,7 @@ toggleButton?.addEventListener('click', () => {
 })
 
 const sampleCanvas = document.getElementById('sample-canvas')
-const ctx = sampleCanvas?.getContext("2d")
+const ctx = sampleCanvas?.getContext('2d')
 sampleCanvas?.classList.add('border', 'border-border')
-ctx.fillStyle = "#FF0000"
+ctx.fillStyle = '#FF0000'
 ctx.fillRect(0, 0, 80, 80)
