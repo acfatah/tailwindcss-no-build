@@ -228,7 +228,6 @@
         /* form input */
         .semantic-tailwind a[role='button'],
         .semantic-tailwind button,
-        .semantic-tailwind input[type='submit'],
         .semantic-tailwind input[type='reset'],
         .semantic-tailwind input[type='text'],
         .semantic-tailwind input[type='password'],
@@ -238,21 +237,7 @@
         .semantic-tailwind input[type='date'],
         .semantic-tailwind select,
         .semantic-tailwind textarea {
-          @apply border-border rounded-xl border font-normal;
-        }
-
-        .semantic-tailwind a[role='button'],
-        .semantic-tailwind button,
-        .semantic-tailwind input[type='reset'],
-        .semantic-tailwind input[type='text'],
-        .semantic-tailwind input[type='password'],
-        .semantic-tailwind input[type='number'],
-        .semantic-tailwind input[type='email'],
-        .semantic-tailwind input[type='url'],
-        .semantic-tailwind input[type='date'],
-        .semantic-tailwind select,
-        .semantic-tailwind textarea {
-          @apply border-border text-foreground bg-background hover:border-primary hover:ring-primary rounded-xl border font-normal hover:outline-none;
+          @apply border-border focus:border-background border-border text-foreground bg-background hover:border-primary hover:ring-primary rounded-xl border font-normal hover:outline-none;
         }
 
         /* form input placeholder */
@@ -291,6 +276,14 @@
           @apply cursor-pointer;
         }
 
+        /**
+         * Currently styling placeholder for date input is not supported
+         * https://stackoverflow.com/questions/14507119/is-it-possible-to-style-the-default-placeholder-text-on-an-html5-input-type-dat
+         */
+        /* .semantic-tailwind input[type='date']::placeholder {
+          @apply text-neutral-500;
+        } */
+
         .dark
           .semantic-tailwind
           input[type='date']::-webkit-calendar-picker-indicator {
@@ -310,10 +303,18 @@
         }
 
         /* form input submit and reset button */
-        .semantic-tailwind form input[type='submit'],
-        .semantic-tailwind form button[type='submit'],
+        .semantic-tailwind button[type='submit'],
         .semantic-tailwind input[type='submit'] {
           @apply border-primary bg-primary hover:bg-primary/80 focus:border-primary/80 focus:bg-primary/80 text-white;
+        }
+
+        .semantic-tailwind input[type='submit'] {
+          /* HOTFIX: not sure why the height is 36px compared to other inputs which are 38px */
+          @apply h-[38px] rounded-xl;
+        }
+
+        .semantic-tailwind button[type='submit'] {
+          @apply focus:bg-primary/80 !important;
         }
 
         .semantic-tailwind a[role='button'],
@@ -591,6 +592,10 @@
 
         <p>
           <button>Button</button>
+        </p>
+
+        <p>
+          <button type="submit">Submit Button</button>
         </p>
 
         <p>
