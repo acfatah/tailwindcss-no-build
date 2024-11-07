@@ -190,14 +190,6 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
       @apply flex flex-col gap-2;
     }
 
-    .semantic-tailwind form > [role='help'] {
-      @apply relative -top-1 text-neutral-500 dark:text-neutral-400;
-    }
-
-    .semantic-tailwind form > [role='alert'] {
-      @apply relative -top-1 text-red-500;
-    }
-
     .semantic-tailwind fieldset > [role='button'],
     .semantic-tailwind form > [role='button'] {
       @apply flex justify-end gap-2;
@@ -218,6 +210,19 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
     .semantic-tailwind label[for]:has(+ input:required)::before {
       content: ' *';
       @apply relative -top-1 text-red-500;
+    }
+
+    /* form help and error */
+    .semantic-tailwind form > [role='help'] {
+      @apply relative -top-1 text-neutral-500 dark:text-neutral-400;
+    }
+
+    .semantic-tailwind form > [role='alert'] {
+      @apply relative -top-1 text-red-500;
+    }
+
+    .semantic-tailwind form > [aria-invalid='true'] {
+      @apply border border-red-500 focus:outline-none focus:ring-red-500 !important;
     }
 
     /* form input */
