@@ -258,11 +258,25 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
     /* form checkbox and radio input */
     .semantic-tailwind input[type='checkbox'],
     .semantic-tailwind input[type='radio'] {
-      @apply hover:cursor-pointer;
+      @apply cursor-pointer;
+    }
+
+    .semantic-tailwind input[type='checkbox']:checked,
+    .semantic-tailwind input[type='radio']:checked {
+      @apply bg-primary focus:bg-primary;
+    }
+
+    .semantic-tailwind input[type='checkbox']:not(:checked),
+    .semantic-tailwind input[type='radio']:not(:checked) {
+      @apply focus:bg-white;
+    }
+
+    .semantic-tailwind input[type='checkbox'] {
+      @apply rounded;
     }
 
     /* form color input */
-    input[type='color']:focus {
+    .semantic-tailwind input[type='color']:focus {
       @apply rounded;
     }
 
