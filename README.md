@@ -17,6 +17,9 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   tailwind.config = {
     darkMode: 'class',
     theme: {
+      container: {
+        center: true,
+      },
       extend: {
         fontFamily: {
           sans: ['Inter', 'sans-serif'],
@@ -75,187 +78,240 @@ Minimal, copy-paste configuration for building [TailwindCSS](https://tailwindcss
   }
 
   @layer base {
-    :not(input[type='checkbox'], a):focus {
+    body {
+      @apply text-foreground bg-background p-2 sm:p-4;
+    }
+  }
+
+  @layer components {
+    .semantic-tailwind :not(input[type='checkbox'], a):focus {
       @apply rounded-xl;
     }
 
-    :not(input[type='submit']):focus {
+    .semantic-tailwind :not(input[type='submit']):focus {
       @apply bg-background/10 dark:bg-background/90;
     }
 
-    :focus {
+    .semantic-tailwind :focus {
       @apply border-primary ring-primary outline-none ring-2;
     }
-  }
 
-  body {
-    @apply text-foreground bg-background p-2 sm:p-4;
-  }
+    /* Typography */
+    .semantic-tailwind .container {
+      @apply prose prose-neutral dark:prose-invert;
+    }
 
-  h1 > small,
-  h2 > small,
-  h3 > small,
-  h4 > small,
-  h5 > small,
-  h6 > small {
-    @apply font-light;
-  }
+    .semantic-tailwind .container > header,
+    .semantic-tailwind .container > article,
+    .semantic-tailwind .container > section {
+      h1 {
+        @apply relative text-5xl;
+      }
 
-  blockquote > cite {
-    @apply block text-sm font-light;
-  }
+      h2 {
+        @apply relative text-3xl;
+      }
 
-  h1 > hr,
-  h2 > hr,
-  h3 > hr,
-  h4 > hr,
-  h5 > hr,
-  h6 > hr {
-    @apply !mb-0 !mt-2;
-  }
+      h3 {
+        @apply relative text-2xl;
+      }
 
-  hr {
-    @apply border-border;
-  }
+      h4 {
+        @apply relative text-xl;
+      }
 
-  a:focus {
-    @apply rounded-sm;
-  }
+      h5 {
+        @apply relative text-lg;
+      }
 
-  meter {
-    @apply h-6 overflow-hidden rounded-xl;
-  }
+      h6 {
+        @apply relative;
+      }
+    }
 
-  progress {
-    @apply border-border overflow-hidden rounded-xl border-2;
-  }
+    .semantic-tailwind h1 > small,
+    .semantic-tailwind h2 > small,
+    .semantic-tailwind h3 > small,
+    .semantic-tailwind h4 > small,
+    .semantic-tailwind h5 > small,
+    .semantic-tailwind h6 > small {
+      @apply font-light;
+    }
 
-  table > caption {
-    @apply caption-bottom text-neutral-500 dark:text-neutral-400;
-  }
+    .semantic-tailwind blockquote > cite {
+      @apply block text-sm font-light;
+    }
 
-  fieldset {
-    @apply border-border rounded-xl border-2 p-2 sm:p-4;
-  }
+    /* link */
+    .semantic-tailwind a[role='button'] {
+      @apply inline-block py-4 no-underline;
+    }
 
-  legend {
-    @apply p-2 text-lg font-bold;
-  }
+    /* hr */
+    .semantic-tailwind hr {
+      @apply border-border !important;
+    }
 
-  fieldset,
-  form {
-    @apply flex flex-col gap-2;
-  }
+    .semantic-tailwind h1 > hr,
+    .semantic-tailwind h2 > hr,
+    .semantic-tailwind h3 > hr,
+    .semantic-tailwind h4 > hr,
+    .semantic-tailwind h5 > hr,
+    .semantic-tailwind h6 > hr {
+      @apply !mb-0 !mt-2;
+    }
 
-  form > [role='help'] {
-    @apply relative -top-1 text-neutral-500 dark:text-neutral-400;
-  }
+    /* meter */
+    .semantic-tailwind meter {
+      @apply h-6 overflow-hidden rounded-xl;
+    }
 
-  form > [role='alert'] {
-    @apply relative -top-1 text-red-500;
-  }
+    /* progress */
+    .semantic-tailwind progress {
+      @apply border-border overflow-hidden rounded-xl border-2;
+    }
 
-  fieldset > [role='button'],
-  form > [role='button'] {
-    @apply flex justify-end gap-2;
-  }
+    /* table */
+    .semantic-tailwind table > caption {
+      @apply caption-bottom text-neutral-500 dark:text-neutral-400;
+    }
 
-  label {
-    @apply relative -bottom-1 flex items-center;
-  }
+    /* form and fieldset */
+    .semantic-tailwind fieldset {
+      @apply border-border rounded-xl border-2 p-2 sm:p-4;
+    }
 
-  label[for]:has(input[type='checkbox']),
-  label[for]:has(input[type='radio']),
-  label[for]:has(input[type='color']) {
-    @apply select-none gap-2 hover:cursor-pointer;
-  }
+    .semantic-tailwind legend {
+      @apply p-2 text-lg font-bold;
+    }
 
-  input[type='checkbox'],
-  input[type='radio'] {
-    @apply hover:cursor-pointer;
-  }
+    .semantic-tailwind fieldset,
+    .semantic-tailwind form {
+      @apply flex flex-col gap-2;
+    }
 
-  label[for]:has(+ input:required)::before {
-    content: ' *';
-    @apply relative -top-1 text-red-500;
-  }
+    .semantic-tailwind form > [role='help'] {
+      @apply relative -top-1 text-neutral-500 dark:text-neutral-400;
+    }
 
-  a[role='button'],
-  button,
-  input[type='submit'],
-  input[type='reset'],
-  input[type='text'],
-  input[type='password'],
-  input[type='number'],
-  input[type='email'],
-  input[type='url'],
-  input[type='date'],
-  select,
-  textarea {
-    @apply border-border rounded-xl border font-normal;
-  }
+    .semantic-tailwind form > [role='alert'] {
+      @apply relative -top-1 text-red-500;
+    }
 
-  a[role='button'],
-  button,
-  input[type='reset'],
-  input[type='text'],
-  input[type='password'],
-  input[type='number'],
-  input[type='email'],
-  input[type='url'],
-  input[type='date'],
-  select,
-  textarea {
-    @apply border-border text-foreground bg-background hover:border-primary hover:ring-primary rounded-xl border font-normal hover:outline-none;
-  }
+    .semantic-tailwind fieldset > [role='button'],
+    .semantic-tailwind form > [role='button'] {
+      @apply flex justify-end gap-2;
+    }
 
-  form input[type='submit'],
-  form button[type='submit'],
-  input[type='submit'] {
-    @apply border-primary bg-primary hover:bg-primary/80 focus:border-primary/80 focus:bg-primary/80 text-white;
-  }
+    /* form label */
+    .semantic-tailwind label {
+      @apply relative -bottom-1 flex items-center;
+    }
 
-  input[type='date']::-webkit-calendar-picker-indicator {
-    @apply cursor-pointer;
-  }
+    .semantic-tailwind label[for]:has(input[type='checkbox']),
+    .semantic-tailwind label[for]:has(input[type='radio']),
+    .semantic-tailwind label[for]:has(input[type='color']) {
+      @apply select-none gap-2 hover:cursor-pointer;
+    }
 
-  .dark input[type='date']::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    @apply cursor-pointer;
-  }
+    /* form required input label */
+    .semantic-tailwind label[for]:has(+ input:required)::before {
+      content: ' *';
+      @apply relative -top-1 text-red-500;
+    }
 
-  .dark input[type='date']::-webkit-calendar-picker-indicator:focus {
-    filter: invert(1) hue-rotate(180deg);
-  }
+    /* form input */
+    .semantic-tailwind a[role='button'],
+    .semantic-tailwind button,
+    .semantic-tailwind input[type='submit'],
+    .semantic-tailwind input[type='reset'],
+    .semantic-tailwind input[type='text'],
+    .semantic-tailwind input[type='password'],
+    .semantic-tailwind input[type='number'],
+    .semantic-tailwind input[type='email'],
+    .semantic-tailwind input[type='url'],
+    .semantic-tailwind input[type='date'],
+    .semantic-tailwind select,
+    .semantic-tailwind textarea {
+      @apply border-border rounded-xl border font-normal;
+    }
 
-  input[type='date']::-webkit-calendar-picker-indicator:focus {
-    @apply ring-primary outline-none ring-2;
-  }
+    .semantic-tailwind a[role='button'],
+    .semantic-tailwind button,
+    .semantic-tailwind input[type='reset'],
+    .semantic-tailwind input[type='text'],
+    .semantic-tailwind input[type='password'],
+    .semantic-tailwind input[type='number'],
+    .semantic-tailwind input[type='email'],
+    .semantic-tailwind input[type='url'],
+    .semantic-tailwind input[type='date'],
+    .semantic-tailwind select,
+    .semantic-tailwind textarea {
+      @apply border-border text-foreground bg-background hover:border-primary hover:ring-primary rounded-xl border font-normal hover:outline-none;
+    }
 
-  input[type='color']:focus {
-    @apply rounded;
-  }
+    /* form input placeholder */
+    .semantic-tailwind input::placeholder {
+      @apply text-neutral-500;
+    }
 
-  input::placeholder {
-    @apply text-neutral-500;
-  }
+    /* form checkbox and radio input */
+    .semantic-tailwind input[type='checkbox'],
+    .semantic-tailwind input[type='radio'] {
+      @apply hover:cursor-pointer;
+    }
 
-  button:disabled,
-  input:disabled,
-  select:disabled,
-  textarea:disabled {
-    @apply hover:bg-background opacity-50 hover:cursor-not-allowed hover:border-neutral-500;
-  }
+    /* form color input */
+    input[type='color']:focus {
+      @apply rounded;
+    }
 
-  a[role='button'],
-  button,
-  input[type='submit'],
-  input[type='reset'] {
-    @apply px-4 py-1 no-underline hover:cursor-pointer;
-  }
+    /* from date input */
+    .semantic-tailwind input[type='date']::-webkit-calendar-picker-indicator {
+      @apply cursor-pointer;
+    }
 
-  a[role='button'] {
-    @apply py-2;
+    .dark
+      .semantic-tailwind
+      input[type='date']::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      @apply cursor-pointer;
+    }
+
+    .dark
+      .semantic-tailwind
+      input[type='date']::-webkit-calendar-picker-indicator:focus {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    .semantic-tailwind
+      input[type='date']::-webkit-calendar-picker-indicator:focus {
+      @apply ring-primary outline-none ring-2;
+    }
+
+    /* form input submit and reset button */
+    .semantic-tailwind form input[type='submit'],
+    .semantic-tailwind form button[type='submit'],
+    .semantic-tailwind input[type='submit'] {
+      @apply border-primary bg-primary hover:bg-primary/80 focus:border-primary/80 focus:bg-primary/80 text-white;
+    }
+
+    .semantic-tailwind a[role='button'],
+    .semantic-tailwind button,
+    .semantic-tailwind input[type='submit'],
+    .semantic-tailwind input[type='reset'] {
+      @apply px-4 py-1 no-underline hover:cursor-pointer;
+    }
+
+    /* form disabled input */
+    .semantic-tailwind button:disabled,
+    .semantic-tailwind input:disabled,
+    .semantic-tailwind select:disabled,
+    .semantic-tailwind textarea:disabled {
+      @apply hover:bg-background opacity-50 hover:cursor-not-allowed hover:border-neutral-500;
+    }
+
+    /* @layer components */
   }
 </style>
 ```
